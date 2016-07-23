@@ -1,0 +1,67 @@
+<html>
+<head>
+<script type="text/javascript" src=connect4.js></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />  
+ <link rel="stylesheet" type="text/css" href="connect4.css">
+<style>
+
+
+</style>
+</head>
+<body >
+<div id="start_game_dialog" class="modal">
+<div class="modal-content">
+  <div class="modal-header">
+    <span class="close" onclick=start_game_dialog.style.display='none'>x</span>
+    <h2>New Game</h2>
+  </div>
+  <div class="modal-body">
+    <a href="#" onclick='start_game("r")' class='primary_button red'>Play as Red</a>
+    <a href="#" onclick='start_game("y")' class='primary_button yellow'>Play as Yellow</a>
+  </div>
+</div>
+</div>
+
+<div id="show_message_dialog" class="modal">
+<div class="modal-content">
+  <div class="modal-header">
+    <span class="close" onclick=show_message_dialog.style.display='none'>x</span>
+    <h2 id=the_message></h2>
+  </div>
+  <div class="modal-body">
+    <a href="#" onclick='show_start_game_dialog()' class='primary_button'>New Game</a>
+  </div>
+</div>
+</div>
+
+<div class=control>
+<div class=title>Connect 4!</div>
+<a href =# class=primary_button onclick=show_start_game_dialog()>New Game</a>
+<div class=comment id=last_message></div>
+</div>
+<canvas id="canvas"></canvas>
+
+<script type="text/javascript">
+//this code initliazed the main module and show the html modal dialog
+var start_game_dialog = document.getElementById('start_game_dialog');
+var show_message_dialog = document.getElementById('show_message_dialog');
+
+function show_start_game_dialog(){
+	show_message_dialog.style.display = "none"
+	start_game_dialog.style.display = "block";
+}
+function show_message(message){
+	start_game_dialog.style.display = "none";
+	document.getElementById('the_message').innerHTML=message;
+	document.getElementById('last_message').innerHTML='(Last game:'+message+')';
+  show_message_dialog.style.display='block';
+}
+function start_game(color){
+	start_game_dialog.style.display='none';
+	game.new_game(color);
+}
+var game=connect4("canvas",show_message,show_start_game_dialog); //starting the connect4 module and injecting the dialog gui callbacks
+</script>   
+
+</body>
+</html>
